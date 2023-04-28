@@ -34,6 +34,27 @@ namespace WebApi.Helpers.Repositories
             return null!;
         }
 
-        
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            try
+            {
+                _context.Set<TEntity>().Update(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            catch { return null!; }
+            
+        }
+        public virtual async Task<bool> DeleteAsync(TEntity entity)
+        {
+            try
+            {
+                _context.Set<TEntity>().Remove(entity);
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch { return false; }
+        }
     }
 }
