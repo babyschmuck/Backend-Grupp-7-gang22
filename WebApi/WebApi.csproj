@@ -19,6 +19,9 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Helpers\Services\" />
+    <Folder Include="Models\Entities\" />
+    <Folder Include="Models\Dtos\" />
   </ItemGroup>
 
 </Project>
