@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using WebApi.Contexts;
 
-namespace WebApi.Helpers.Repositories
+namespace WebApi.Repositories
 {
     public abstract class Repository<TEntity> where TEntity : class
     {
@@ -43,7 +43,7 @@ namespace WebApi.Helpers.Repositories
                 return entity;
             }
             catch { return null!; }
-            
+
         }
         public virtual async Task<bool> DeleteAsync(TEntity entity)
         {

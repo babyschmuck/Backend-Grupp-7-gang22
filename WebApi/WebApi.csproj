@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helpers\Services\**" />
+    <Content Remove="Helpers\Services\**" />
+    <EmbeddedResource Remove="Helpers\Services\**" />
+    <None Remove="Helpers\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
@@ -18,9 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Helpers\Services\" />
-    <Folder Include="Models\Entities\" />
     <Folder Include="Models\Dtos\" />
   </ItemGroup>
 
