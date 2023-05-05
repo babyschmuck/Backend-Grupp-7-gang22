@@ -38,7 +38,7 @@ namespace WebApi.Controllers
                 return StatusCode(500);
             }
         }
-        [HttpPost("/regiser")]
+        [HttpPost("/register")]
         public async Task<IActionResult> RegisterAsync(RegisterSchema schema)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,6 @@
-﻿using WebApi.Helpers;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using WebApi.Helpers;
 using WebApi.Models.Entities;
 using WebApi.Models.Schemas;
 using WebApi.Repositories;
@@ -8,9 +10,11 @@ namespace WebApi.Services
     public class UserService
     {
         private readonly UserRepository _repository;
-        public UserService(UserRepository repository) 
-        { 
-            _repository  = repository;
+        private readonly JwtToken _jwt;
+        public UserService(UserRepository repository, JwtToken jwt)
+        {
+            _repository = repository;
+            _jwt = jwt;
         }
         public async Task<string> LoginAsync(LoginSchema schema)
         {
@@ -22,7 +26,17 @@ namespace WebApi.Services
                 throw new Exception("Invalid email or password.");
 
             //jwt token later
-            return "";
+            var claimsIdentity = new ClaimsIdentity(new Claim[]
+            {
+                new Claim("id", user.Id.ToString()),
+                new Claim("email", user.Email),
+                new Claim("name", user.FirstName)
+            });
+            
+            if(schema.RememberMe == true)
+                return _jwt.Generate(claimsIdentity, DateTime.Now.AddDays(90));
+
+            return _jwt.Generate(claimsIdentity, DateTime.Now.AddHours(1));
         }
         public async Task<string> RegisterAsync(RegisterSchema schema)
         {
@@ -32,10 +46,17 @@ namespace WebApi.Services
 
             schema.Password = PasswordManager.GenerateHash(schema.Password);
 
-            await _repository.AddAsync(schema);
-            
+            user = await _repository.AddAsync(schema);
+
             //jwt token later
-            return "";
+            var claimsIdentity = new ClaimsIdentity(new Claim[]
+            {
+                new Claim("id", user.Id.ToString()),
+                new Claim("email", user.Email),
+                new Claim("name", user.FirstName)
+            });
+            
+            return _jwt.Generate(claimsIdentity, DateTime.Now.AddHours(1));
         }
     }
 }
