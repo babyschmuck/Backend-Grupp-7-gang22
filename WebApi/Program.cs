@@ -13,10 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("Grupp7DB")));
+builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("VickyTest")));
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<JwtToken>();
 
 

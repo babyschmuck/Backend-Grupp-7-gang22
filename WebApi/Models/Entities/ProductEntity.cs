@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using WebApi.Models.Dtos;
 
 namespace WebApi.Models.Entities
 {
@@ -25,5 +27,18 @@ namespace WebApi.Models.Entities
         public CompanyEntity Company { get; set; }
 
         public IEnumerable<ReviewEntity> Reviews { get; set; }
+
+
+        public static implicit operator Product(ProductEntity entity)
+        {
+            return new Product
+            {
+                Id = entity.Id,
+                Description = entity.Description,
+                Name = entity.Name,
+                Price = entity.Price,
+                Rating = entity.Rating,
+            };
+        }
     }
 }
