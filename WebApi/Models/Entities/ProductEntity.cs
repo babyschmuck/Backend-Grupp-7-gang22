@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using WebApi.Models.Dtos;
 
@@ -19,6 +21,7 @@ namespace WebApi.Models.Entities
         public int Rating { get; set; }
 
         [Required]
+        [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
 
@@ -28,6 +31,7 @@ namespace WebApi.Models.Entities
 
         public IEnumerable<ReviewEntity> Reviews { get; set; }
 
+        public IEnumerable<OrderProductEntity> OrderProducts { get; set; }
 
         public static implicit operator Product(ProductEntity entity)
         {

@@ -29,7 +29,8 @@ namespace WebApi.Models.Entities
         public IEnumerable<AddressEntity> Addresses { get; set; }
         public IEnumerable<PaymentDetailEntity> PaymentDetails { get; set; }
         public IEnumerable<ReviewEntity> Reviews { get; set; }
+        public IEnumerable<OrderEntity> Orders { get; set; }
 
-
+        public IEnumerable<UserPromoCodeEntity> UserPromoCodes { get; set; }
     }
 }
